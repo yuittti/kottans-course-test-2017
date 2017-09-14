@@ -1,0 +1,42 @@
+@import 'common';
+
+.repos {
+  &-list {
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: flex-start;
+    // flex-wrap: wrap;
+  }
+
+  &-item {
+    width: 100%;
+    // min-width: 280px;
+    // min-height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px 0 rgba(black, .5);
+    margin-bottom: 20px;
+
+    &-line {
+      margin-bottom: 15px;
+    }
+
+    &-txt {
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 1.25;
+      
+      display: inline;
+    }
+
+    &-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: gray;
+      display: inline;
+      margin-right: 5px;
+    }
+
+  }
+}
