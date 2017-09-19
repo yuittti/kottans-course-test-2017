@@ -1,0 +1,47 @@
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.25);
+  display: flex;
+  z-index: 99;
+  transition: .2s ease-in-out;
+  
+
+  &.__opened {
+    opacity: 1;
+    visibility: visible;
+    
+
+    .modal-content {
+      transform: scale(1,1);
+    }
+  }
+
+  &-content {
+    width: 500px;
+    max-width: 95%;
+    height: 500px;
+    max-height: 95vh;
+    margin: auto;
+    background: white;
+    transform: scale(0, 0);
+    transition: .4s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  &-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+}

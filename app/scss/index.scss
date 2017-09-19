@@ -1,4 +1,7 @@
+@import 'reset';
+@import 'layout';
 @import 'common';
+@import 'modal';
 
 .repos {
   &-list {
@@ -6,6 +9,7 @@
     // justify-content: space-between;
     // align-items: flex-start;
     // flex-wrap: wrap;
+    padding: 20px 10px;
   }
 
   &-item {
@@ -15,8 +19,13 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 5px 0 rgba(black, .5);
+    box-shadow: 0 2px 5px 0 rgba(black, .25);
     margin-bottom: 20px;
+    transition: .2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 4px 25px 0 rgba(black, .25);
+    }
 
     &-line {
       margin-bottom: 15px;

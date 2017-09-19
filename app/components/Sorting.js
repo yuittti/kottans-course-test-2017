@@ -14,9 +14,11 @@ const Sorting = (props) => {
 
   return (
     <div className="sortbar">
-      <div>
-        <span>Sort by: </span>
-
+      <div className="sortbar-item">
+        <div className="sortbar-title">
+          <label className="form-label">Sort by: </label>
+        </div>
+        
         <select onChange={onSortParamChange} value={props.sortBy}>
           <option value="name">Name</option>
           <option value="stargazers_count">Stars</option>
@@ -25,8 +27,8 @@ const Sorting = (props) => {
         </select>
       </div>
 
-      <div>
-        <span>Sort direction: </span>
+      <div className="sortbar-item">
+        <label className="form-label">Sort direction: </label>
 
         <select onChange={onSortDirChange} value={props.sortDir}>
           <option value="desc">Desc</option>

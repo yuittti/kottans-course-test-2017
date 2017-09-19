@@ -5,13 +5,9 @@ import Home from './Home';
 class App extends React.Component {
   render () {
     return (
-      <div className='container'>
+      <div className='container page-container'>
         <Router>
-          <div>
-            {/*<Switch>*/}
-              <Route exact path='/' component={Home} />
-            {/*</Switch>*/}
-          </div>
+          <Route exact path='/' component={Home} />
         </Router>
       </div>
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import Sorting from './Sorting';
 import Filtering from './Filtering';
+import Modal from './Modal';
 import { formatDate } from '../utils/utils.js'
 
 class Repos extends React.Component {
@@ -16,8 +17,10 @@ class Repos extends React.Component {
         oIssues: false,
         topics: false,
         type: 'all',
-        lang: 'all'
-      }
+        lang: 'all',
+        starred: 0
+      },
+      modalOpened: false
     }
 
     this.onSortParamChange = this.onSortParamChange.bind(this);
@@ -25,6 +28,8 @@ class Repos extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.sortRepos = this.sortRepos.bind(this);
     this.filterRepos = this.filterRepos.bind(this);
+    this.onCardClick = this.onCardClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillMount() {
@@ -81,7 +86,7 @@ class Repos extends React.Component {
   }
 
   filterRepos(r) {
-    let { oIssues, topics, type, lang } = this.state.filters;
+    let { oIssues, topics, type, lang, starred } = this.state.filters;
     let checkArr = [];
 
     if (oIssues) {
@@ -103,6 +108,12 @@ class Repos extends React.Component {
     if (lang !== 'all') {
       checkArr.push(!!r.language && r.language.toLowerCase() === lang)
     }
+
+    if (starred === starred) {
+      checkArr.push(r.stargazers_count >= starred);
+    }
+
+
 
     if (checkArr.length) {
       return checkArr.every( el => el );
@@ -152,6 +163,22 @@ class Repos extends React.Component {
     }
   }
 
+  onCardClick(event) {
+    this.setState( () => {
+      return {
+        modalOpened: true
+      }
+    })
+  }
+
+  closeModal() {
+    this.setState( () => {
+      return {
+        modalOpened: false
+      }
+    })
+  }
+
 
 
   render() {
@@ -176,7 +203,8 @@ class Repos extends React.Component {
           return (
           <div 
             className='repos-item'
-            key={`${repo.name}-${index}`}>
+            key={`${repo.name}-${index}`}
+            onClick={this.onCardClick} >
 
             <div className="repos-item-line">
               <span className="repos-item-label">Repo:</span>
@@ -230,6 +258,7 @@ class Repos extends React.Component {
           )
         })}
         </div>
+        <Modal modalOpened={this.state.modalOpened} closeModal={this.closeModal} />
       </div>
     )
   }

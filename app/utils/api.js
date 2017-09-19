@@ -11,3 +11,9 @@ export const fetchRepos = (username, page) => {
   })
 }
 
+export const getProfile = (username) => {
+	return axios
+		.get('https://api.github.com/users/' + username)
+		.then(user => user.data);
+}
+

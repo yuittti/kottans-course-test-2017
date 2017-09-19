@@ -56,21 +56,22 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className="userForm">
+      <div className="page-sidebar">
       {this.state.reseted &&
-        <form onSubmit={this.submitForm}>
-          <label>GitHub user</label>
+        <form onSubmit={this.submitForm} className="form">
+          <label className="title" htmlFor="userName">GitHub user</label>
           <input type="text" 
             id="userName" 
             autoComplete="off"
             onChange={this.handleChange}
+            className="form-input"
           />
-          <button type="submit">Submit</button>
+          <button type="submit" className="button">Submit</button>
         </form>
       }
 
       {!this.state.reseted &&
-        <button onClick={this.resetUser}>Change user</button>
+        <button onClick={this.resetUser} className="button">Change user</button>
       }
       </div>
       

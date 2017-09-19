@@ -73,21 +73,24 @@ class Home extends React.Component {
 
   render () {
     return (
-      <div className='container'>
+      <div className='page-wrapper'>
 
         <Form handleSubmit={this.handleSubmit} />
+        
+        <div className="page-content">
+          {this.state.repos && 
+          <Repos repos={this.state.repos} />
+          }
 
-        {this.state.repos && 
-        <Repos repos={this.state.repos} />
-        }
-
-        {this.state.repos && this.state.page > 0 &&
-        <button 
-          className="load-loadMore" 
-          onClick={this.handleLoadMore}>
-          Load More
-        </button>
-        }
+          {this.state.repos && this.state.page > 0 &&
+          <button 
+            className="load-loadMore" 
+            onClick={this.handleLoadMore}>
+            Load More
+          </button>
+          }
+        </div>
+        
       </div>
     )
   }
