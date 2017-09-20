@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Sorting from './Sorting';
 import Filtering from './Filtering';
 import Modal from './Modal';
@@ -18,7 +19,8 @@ class Repos extends React.Component {
         topics: false,
         type: 'all',
         lang: 'all',
-        starred: 0
+        starred: 0,
+        updated: moment()
       },
       modalOpened: false
     }
@@ -36,11 +38,17 @@ class Repos extends React.Component {
     // get arr of unique vals of all repos' langs
     let langs = [...new Set(this.props.repos.map( el => el.language ))];
     langs = langs.filter( el => !!el);
+    // get arr of repos' upd dates and set it as filter by date after
+    let updDates = [...this.props.repos.map( el => new Date(el.updated_at) )];
+    let smallestDate = new Date(Math.min.apply(null, updDates));
+    const newFiltersState = this.state.filters;
+    newFiltersState['updated'] = moment(smallestDate);
 
     this.setState((prevState) => {
       return {
         fRepos: this.props.repos,
-        rLangs: langs
+        rLangs: langs,
+        filters: newFiltersState
       }
     })
   }
@@ -49,11 +57,17 @@ class Repos extends React.Component {
     // get arr of unique vals of all repos' langs
     let langs = [...new Set(nextProps.repos.map( el => el.language ))];
     langs = langs.filter( el => !!el);
+    // get arr of repos' upd dates and set it as filter by date after
+    let updDates = [...nextProps.repos.map( el => new Date(el.updated_at) )];
+    let smallestDate = new Date(Math.min.apply(null, updDates));
+    const newFiltersState = this.state.filters;
+    newFiltersState['updated'] = moment(smallestDate);
 
     this.setState(() => {
       return {
         fRepos: nextProps.repos,
-        rLangs: langs
+        rLangs: langs,
+        filters: newFiltersState
       }
     })
   }
@@ -86,7 +100,7 @@ class Repos extends React.Component {
   }
 
   filterRepos(r) {
-    let { oIssues, topics, type, lang, starred } = this.state.filters;
+    let { oIssues, topics, type, lang, starred, updated } = this.state.filters;
     let checkArr = [];
 
     if (oIssues) {
@@ -112,6 +126,11 @@ class Repos extends React.Component {
     if (starred === starred) {
       checkArr.push(r.stargazers_count >= starred);
     }
+
+    if (r.updated_at.length > 0) {
+      checkArr.push(moment(r.updated_at) >= updated);
+    }
+
 
 
 

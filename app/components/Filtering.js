@@ -1,4 +1,7 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Filtering = (props) => {
 
@@ -14,6 +17,10 @@ const Filtering = (props) => {
       props.onFilterChange(id, value);
     }
         
+  }
+
+  const onDateChange = (date) => {
+     props.onFilterChange('updated', date);
   }
 
   return (
@@ -76,6 +83,18 @@ const Filtering = (props) => {
               <label htmlFor="starred" className="form-label">Number of stars</label>
 
               <input type="number" id="starred" min="0" value={props.filters.starred} onChange={onFilterChange} />
+            </div>
+
+            <div className="filterbar-item">
+              <label htmlFor="starred" className="form-label">Updated after</label>
+
+              <DatePicker 
+                selected={props.filters.updated} 
+                onChange={onDateChange} 
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select" />
             </div>
           </div>
         </div>

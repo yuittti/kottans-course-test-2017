@@ -13,12 +13,14 @@ body {
 
 select, 
 option,
-input[type=number] {
+input[type=number],
+.react-datepicker__input-container input[type=text] {
   height: 28px;
   font-size: 14px;
   min-width: 150px;
 }
 
+.react-datepicker__input-container input[type=text],
 input[type=number] {
   background: transparent;
   padding-left: 5px;

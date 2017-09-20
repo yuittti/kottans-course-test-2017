@@ -20,7 +20,8 @@ var config = {
   module: {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' },
-      { test: /\.scss$/, use: ['style-loader', 'css-loader'+sMap, 'postcss-loader'+sMap, 'sass-loader'+sMap]}
+      { test: /\.scss$/, use: ['style-loader', 'css-loader'+sMap, 'postcss-loader'+sMap, 'sass-loader'+sMap]},
+      { test: /\.css$/, use: ['style-loader', 'css-loader']},
     ]   
   },
   devServer: {
